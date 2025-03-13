@@ -1,6 +1,9 @@
-# 🎈 Blank app template
-
-A simple Streamlit app template for you to modify!
+Ideas
+-csv upload option
+-show table for most recent instance of selected exercise
+-frequency metrics
+-filters on time like last month, 3mo, 6mo, year, YTD, all time
+-muscles worked diagram???
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
 
