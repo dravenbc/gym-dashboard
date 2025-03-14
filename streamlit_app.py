@@ -5,7 +5,7 @@ import altair as alt
 st.title("DBC Gym Dashboard")
 
 #pull data from raw CSV link on github, clean, and sort it
-df = pd.read_csv('https://raw.githubusercontent.com/dravenbc/gym-dashboard/refs/heads/main/data/strong6846573110033259273.csv', delimiter=';', on_bad_lines='skip')
+df = pd.read_csv('https://raw.githubusercontent.com/dravenbc/gym-dashboard/refs/heads/main/data/strong.csv', delimiter=';', on_bad_lines='skip')
 df.columns = df.columns.str.strip()
 df = df.sort_values("Date")
 
@@ -87,3 +87,10 @@ max_weight_chart = (
 # Display Chart
 st.altair_chart(max_weight_chart, use_container_width=True)
 
+# Find the latest workout number for the selected exercise
+latest_workout_number = df[df['Exercise Name'] == selected_exercise]['Workout #'].max()
+# Filter for only that exercise and its latest workout number
+latest_summary = df[(df['Exercise Name'] == selected_exercise) & (df['Workout #'] == latest_workout_number)]
+latest_summary = latest_summary.sort_values(by="Set Order", ascending=True)
+st.subheader(f"Latest Workout Summary for {selected_exercise}")
+st.dataframe(latest_summary, use_container_width=True, column_order=("Set Order", "Pounds", "Reps"))
