@@ -5,7 +5,17 @@ import altair as alt
 st.title("DBC Gym Dashboard")
 
 #pull data from raw CSV link on github, clean, and sort it
-df = pd.read_csv('https://raw.githubusercontent.com/dravenbc/gym-dashboard/refs/heads/main/data/strong.csv', delimiter=';', on_bad_lines='skip')
+#df = pd.read_csv('https://raw.githubusercontent.com/dravenbc/gym-dashboard/refs/heads/main/data/strong.csv', delimiter=';', on_bad_lines='skip')
+
+uploaded_file = st.file_uploader("Upload your own CSV file", type=["csv"])
+
+if uploaded_file:
+    df = pd.read_csv(uploaded_file, delimiter=';', on_bad_lines='skip')
+    st.success("Using uploaded CSV file")
+else:
+    df = pd.read_csv('https://raw.githubusercontent.com/dravenbc/gym-dashboard/refs/heads/main/data/strong.csv', delimiter=';', on_bad_lines='skip')
+    st.info("Using default dataset from GitHub")
+
 df.columns = df.columns.str.strip()
 df = df.sort_values("Date")
 
